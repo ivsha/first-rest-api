@@ -32,10 +32,10 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'sepatu',
+        'hostname' => 'remotemysql.com',
+        'username' => 'A5dQv9WCGx',
+        'password' => 'tr6z7Eukbv',
+        'database' => 'A5dQv9WCGx',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
