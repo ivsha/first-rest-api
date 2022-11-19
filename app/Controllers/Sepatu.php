@@ -56,16 +56,16 @@ class Sepatu extends BaseController
     public function create()
     {
         $sepatu = new ModelSepatu();
-        $nobp = $this->request->getPost("id_sepatu");
+        $id_sepatu = $this->request->getPost("id_sepatu");
         $nama = $this->request->getPost("nama");
-        $alamat = $this->request->getPost("merk");
-        $prodi = $this->request->getPost("deskripsi");
-        $tgllahir = $this->request->getPost("gambar");
+        $merk = $this->request->getPost("merk");
+        $deskripsi = $this->request->getPost("deskripsi");
+        $gambar = $this->request->getPost("gambar");
         $validation = \Config\Services::validation();
         $valid = $this->validate([
             'id_sepatu' => [
-            'rules' => 'is_unique[mahasiswa.id_sepatu]',
-            'label' => 'Nomor Induk Mahasiswa',
+            'rules' => 'is_unique[sepatu.id_sepatu]',
+            'label' => 'Nomor Induk sepatu',
             'errors' => [
             'is_unique' => "{field} sudah ada"
             ]
@@ -80,11 +80,11 @@ class Sepatu extends BaseController
             return $this->respond($response, 404);
         }else {
             $sepatu->insert([
-                'id_sepatu' => $nobp,
+                'id_sepatu' => $id_sepatu,
                 'nama' => $nama,
-                'merk' => $alamat,
-                'deskripsi' => $prodi,
-                'gambar' => $tgllahir,
+                'merk' => $merk,
+                'deskripsi' => $deskripsi,
+                'gambar' => $gambar,
             ]);
             $response = [
                 'status' => 201,
@@ -95,7 +95,7 @@ class Sepatu extends BaseController
         }
     }
 
-    public function update($nobp = null)
+    public function update($id_sepatu = null)
     {
         $model = new ModelSepatu();
         $data = [
@@ -105,22 +105,22 @@ class Sepatu extends BaseController
             'gambar' => $this->request->getVar("gambar"),
         ];
         $data = $this->request->getRawInput();
-        $model->update($nobp, $data);
+        $model->update($id_sepatu, $data);
         $response = [
             'status' => 200,
             'error' => null,
-            'message' => "Data Anda dengan NIM $nobp berhasil 
+            'message' => "Data Anda dengan NIM $id_sepatu berhasil 
             dibaharukan"
         ];
         return $this->respond($response);
     }
 
-    public function delete($nobp = null)
+    public function delete($id_sepatu = null)
     {
         $sepatu = new ModelSepatu();
-        $cekData = $sepatu->find($nobp);
+        $cekData = $sepatu->find($id_sepatu);
         if($cekData) {
-            $sepatu->delete($nobp);
+            $sepatu->delete($id_sepatu);
             $response = [
             'status' => 200,
             'error' => null,
